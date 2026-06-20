@@ -340,3 +340,14 @@ body.page-is-gliding .app-container {
         transform: translateY(0);
     }
 }
+* {
+    -webkit-tap-highlight-color: transparent;
+    -webkit-touch-callout: none;
+    -webkit-user-select: none;
+    user-select: none;
+}
+
+button, a, .matrix-frame, .secret-card-3d, .terminal-3d-card, .iso-card {
+    -webkit-tap-highlight-color: transparent;
+    outline: none;
+}
