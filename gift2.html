@@ -1,0 +1,232 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Sonic Freq Terminal // Node 02</title>
+    <link rel="stylesheet" href="style.css">
+    <link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@400;600;700&display=swap" rel="stylesheet">
+    
+    <style>
+        html, body {
+            background-color: #05070a;
+            margin: 0;
+            padding: 0;
+            font-family: 'Space Grotesk', sans-serif;
+            color: #ffffff;
+            width: 100vw;
+            height: 100vh;
+            overflow: hidden;
+        }
+
+        /* 🏛️ VIEWPORT BASE & ENTRY CURVE */
+        .audio-viewport {
+            position: relative;
+            width: 100%;
+            height: 100vh;
+            box-sizing: border-box;
+            padding: 40px;
+            display: flex;
+            flex-direction: column;
+            justify-content: space-between;
+            opacity: 0;
+            transform: translateY(20px);
+            transition: transform 0.6s cubic-bezier(0.16, 1, 0.3, 1), opacity 0.5s ease;
+            animation: coreInitialize 0.8s cubic-bezier(0.16, 1, 0.3, 1) forwards;
+        }
+        @keyframes coreInitialize { to { opacity: 1; transform: translateY(0); } }
+
+        /* 🌊 BACKWARD EXIT LAYER DISPLACEMENT */
+        .audio-viewport.exiting {
+            opacity: 0;
+            transform: scale(0.95) translateY(-20px);
+        }
+
+        .header-block { text-align: left; }
+
+        .meta-tag {
+            font-family: monospace;
+            font-size: 11px;
+            color: #ff4b72;
+            text-transform: uppercase;
+            letter-spacing: 3px;
+            margin-bottom: 8px;
+        }
+
+        .node-title {
+            font-size: 36px;
+            font-weight: 700;
+            text-transform: uppercase;
+            margin: 0 0 10px 0;
+            letter-spacing: -0.5px;
+        }
+
+        /* 🎛️ HIGH-TECH MEDIA CONTROL CHASSIS */
+        .audio-deck-panel {
+            width: 100%;
+            max-width: 460px;
+            background: linear-gradient(135deg, rgba(20, 25, 33, 0.85) 0%, rgba(10, 12, 16, 0.95) 100%);
+            border: 1px solid rgba(255, 75, 114, 0.2);
+            border-radius: 16px;
+            padding: 32px;
+            box-sizing: border-box;
+            margin: 0 auto;
+            text-align: center;
+            box-shadow: 0 20px 50px rgba(0, 0, 0, 0.5);
+        }
+
+        .frequency-pulse-bay {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            gap: 6px;
+            height: 60px;
+            margin-bottom: 30px;
+        }
+
+        .freq-bar {
+            width: 4px;
+            height: 15px;
+            background-color: #ff4b72;
+            border-radius: 2px;
+            transition: height 0.3s ease;
+        }
+
+        .audio-deck-panel.playing .freq-bar {
+            animation: waveBounce 0.6s ease infinite alternate;
+        }
+        .audio-deck-panel.playing .freq-bar:nth-child(2n) { animation-delay: 0.15s; }
+        .audio-deck-panel.playing .freq-bar:nth-child(3n) { animation-delay: 0.3s; }
+
+        @keyframes waveBounce { 
+            0% { height: 10px; opacity: 0.4; } 
+            100% { height: 55px; opacity: 1; filter: drop-shadow(0 0 8px #ff4b72); } 
+        }
+
+        .track-metadata { margin-bottom: 25px; }
+
+        .track-title {
+            font-size: 18px;
+            font-weight: 700;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            margin: 0 0 6px 0;
+        }
+
+        .track-status {
+            font-family: monospace;
+            font-size: 11px;
+            color: rgba(255, 255, 255, 0.4);
+        }
+
+        .play-hub-trigger {
+            width: 64px;
+            height: 64px;
+            border-radius: 50%;
+            background: rgba(255, 75, 114, 0.1);
+            border: 1px solid #ff4b72;
+            color: #ffffff;
+            font-size: 18px;
+            cursor: pointer;
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            transition: all 0.3s cubic-bezier(0.16, 1, 0.3, 1);
+        }
+
+        .play-hub-trigger:hover {
+            background: #ff4b72;
+            color: #05070a;
+            box-shadow: 0 0 25px rgba(255, 75, 114, 0.4);
+            transform: scale(1.05);
+        }
+
+        .action-return-btn {
+            align-self: flex-start;
+            display: inline-flex;
+            align-items: center;
+            background: rgba(20, 25, 33, 0.9);
+            border: 1px solid rgba(255, 255, 255, 0.08);
+            padding: 14px 24px;
+            border-radius: 6px;
+            color: #ffffff;
+            text-decoration: none;
+            font-family: monospace;
+            font-size: 11px;
+            font-weight: bold;
+            letter-spacing: 2px;
+            transition: all 0.4s cubic-bezier(0.16, 1, 0.3, 1);
+        }
+
+        .action-return-btn:hover {
+            background: #ff4b72;
+            border-color: #ff4b72;
+            color: #05070a;
+            box-shadow: 0 10px 25px rgba(255, 75, 114, 0.3);
+            transform: translateX(-4px);
+        }
+    </style>
+</head>
+<body>
+
+    <div class="app-container audio-viewport">
+        
+        <div class="header-block">
+            <div class="meta-tag">// NODE_02 // SONIC_FREQ</div>
+            <h1 class="node-title">Sonic Freq Terminal</h1>
+        </div>
+
+        <div class="audio-deck-panel" id="deckPanel">
+            <div class="frequency-pulse-bay">
+                <div class="freq-bar"></div><div class="freq-bar"></div><div class="freq-bar"></div>
+                <div class="freq-bar"></div><div class="freq-bar"></div><div class="freq-bar"></div>
+                <div class="freq-bar"></div><div class="freq-bar"></div><div class="freq-bar"></div>
+            </div>
+
+            <div class="track-metadata">
+                <h3 class="track-title">Ambient Wave Protocol</h3>
+                <div class="track-status" id="trackStatus">STATUS // IDLE</div>
+            </div>
+
+            <audio id="coreAudio" src="Sailor Song.mp3" preload="auto"></audio>
+            <button class="play-hub-trigger" id="playBtn" onclick="togglePlayback()">&#9654;</button>
+        </div>
+
+        <a href="#" class="action-return-btn" onclick="smoothReturn(event)">&larr; RETURN_TO_CORE</a>
+
+    </div>
+
+    <script>
+        const audio = document.getElementById('coreAudio');
+        const deck = document.getElementById('deckPanel');
+        const btn = document.getElementById('playBtn');
+        const statusText = document.getElementById('trackStatus');
+
+        function togglePlayback() {
+            if (audio.paused) {
+                audio.play();
+                deck.classList.add('playing');
+                btn.innerHTML = "&#10074;&#10074;";
+                statusText.innerText = "STATUS // TRANSMITTING_WAVES";
+                statusText.style.color = "#ff4b72";
+            } else {
+                audio.pause();
+                deck.classList.remove('playing');
+                btn.innerHTML = "&#9654;";
+                statusText.innerText = "STATUS // IDLE";
+                statusText.style.color = "rgba(255, 255, 255, 0.4)";
+            }
+        }
+
+        function smoothReturn(e) {
+            e.preventDefault();
+            const viewport = document.querySelector('.audio-viewport');
+            viewport.classList.add('exiting');
+            setTimeout(() => {
+                window.location.href = 'gifts.html';
+            }, 550);
+        }
+    </script>
+    <script src="script.js"></script>
+</body>
+</html>

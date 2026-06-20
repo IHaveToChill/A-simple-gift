@@ -1,0 +1,175 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Secure Transmission // Node 03</title>
+    <link rel="stylesheet" href="style.css">
+    <link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@400;600;700&display=swap" rel="stylesheet">
+    
+    <style>
+        html, body {
+            background-color: #05070a;
+            margin: 0;
+            padding: 0;
+            font-family: 'Space Grotesk', sans-serif;
+            color: #ffffff;
+            width: 100vw;
+            height: 100vh;
+            overflow: hidden;
+        }
+
+        /* 🏛️ VIEWPORT BASE & ENTRY CURVE */
+        .text-viewport {
+            position: relative;
+            width: 100%;
+            height: 100vh;
+            box-sizing: border-box;
+            padding: 40px;
+            display: flex;
+            flex-direction: column;
+            justify-content: space-between;
+            opacity: 0;
+            transform: translateY(20px);
+            transition: transform 0.6s cubic-bezier(0.16, 1, 0.3, 1), opacity 0.5s ease;
+            animation: coreInitialize 0.8s cubic-bezier(0.16, 1, 0.3, 1) forwards;
+        }
+        @keyframes coreInitialize { to { opacity: 1; transform: translateY(0); } }
+
+        /* 🌊 BACKWARD EXIT LAYER DISPLACEMENT */
+        .text-viewport.exiting {
+            opacity: 0;
+            transform: scale(0.95) translateY(-20px);
+        }
+
+        .header-block { text-align: left; }
+
+        .meta-tag {
+            font-family: monospace;
+            font-size: 11px;
+            color: #ffffff;
+            text-transform: uppercase;
+            letter-spacing: 3px;
+            margin-bottom: 8px;
+        }
+
+        .node-title {
+            font-size: 36px;
+            font-weight: 700;
+            text-transform: uppercase;
+            margin: 0 0 10px 0;
+            letter-spacing: -0.5px;
+        }
+
+        /* 💾 OBSIDIAN TERMINAL CONSOLE MATRIX BOX */
+        .terminal-console-box {
+            width: 100%;
+            max-width: 650px;
+            height: 350px;
+            background: linear-gradient(135deg, rgba(15, 18, 24, 0.95) 0%, rgba(5, 7, 10, 0.98) 100%);
+            border: 1px solid rgba(255, 255, 255, 0.12);
+            border-radius: 12px;
+            padding: 30px;
+            box-sizing: border-box;
+            margin: 0 auto;
+            overflow-y: auto;
+            text-align: left;
+            position: relative;
+            box-shadow: 0 25px 60px rgba(0, 0, 0, 0.6);
+        }
+
+        .decrypted-text-stream {
+            font-family: monospace;
+            font-size: 14px;
+            line-height: 1.7;
+            color: rgba(255, 255, 255, 0.85);
+            white-space: pre-wrap;
+            margin: 0;
+        }
+
+        .decrypted-text-stream::after {
+            content: "█";
+            animation: cursorBlink 0.8s step-start infinite;
+            color: #ffffff;
+            margin-left: 3px;
+        }
+        @keyframes cursorBlink { 50% { opacity: 0; } }
+
+        .terminal-console-box::-webkit-scrollbar { width: 4px; }
+        .terminal-console-box::-webkit-scrollbar-track { background: transparent; }
+        .terminal-console-box::-webkit-scrollbar-thumb { background: rgba(255, 255, 255, 0.15); border-radius: 2px; }
+
+        .action-return-btn {
+            align-self: flex-start;
+            display: inline-flex;
+            align-items: center;
+            background: rgba(20, 25, 33, 0.9);
+            border: 1px solid rgba(255, 255, 255, 0.08);
+            padding: 14px 24px;
+            border-radius: 6px;
+            color: #ffffff;
+            text-decoration: none;
+            font-family: monospace;
+            font-size: 11px;
+            font-weight: bold;
+            letter-spacing: 2px;
+            transition: all 0.4s cubic-bezier(0.16, 1, 0.3, 1);
+        }
+
+        .action-return-btn:hover {
+            background: #ffffff;
+            border-color: #ffffff;
+            color: #05070a;
+            box-shadow: 0 10px 25px rgba(255, 255, 255, 0.2);
+            transform: translateX(-4px);
+        }
+    </style>
+</head>
+<body>
+
+    <div class="app-container text-viewport">
+        
+        <div class="header-block">
+            <div class="meta-tag">// NODE_03 // CORE_TRANS</div>
+            <h1 class="node-title">Secure Clear Transmission</h1>
+        </div>
+
+        <div class="terminal-console-box">
+            <p class="decrypted-text-stream" id="textStream"></p>
+        </div>
+
+        <a href="#" class="action-return-btn" onclick="smoothReturn(event)">&larr; RETURN_TO_CORE</a>
+
+    </div>
+
+    <script>
+    const rawSecureMessage = "Now here's a simple message I want to share with you...\n\nYou know, I was just thinkin' about how absolute mental it is that out of all the people in this massive, chaotic world, I managed to cross paths with you. You’re not just my favourite person; you’re my absolute favourite view, my best distraction, and the prettiest thought I carry around in my head all day.\n\nI love how you make me laugh, even when I’m trying to be serious. I love how your voice can turn a bad day into a good one, and how your smile can light up the darkest corners of my mind. You’re not just a part of my life; you’re the part that makes it worth living.\n\nSo here’s to us, to the late-night talks, the inside jokes, and the quiet moments that speak louder than words. Here’s to every little thing that makes you, you. And here’s to me, hoping that I can be half as amazing to you as you are to me.\n\nI guess what I’m trying to say is... I like you. A lot. More than I probably should, but I don’t care. Because liking you is the best thing that’s ever happened to me.\n\nSo, let's make it official, yeah? My beautiful girl... will you marry me?\n\nN7BK BRCHA BRCHA BRCHA BRCHA AKTHR MLY YTSWRU MO5K";
+        
+        let stringPointer = 0;
+        const targetOutput = document.getElementById('textStream');
+        const printSpeed = 35;
+
+        function streamTerminalText() {
+            if (stringPointer < rawSecureMessage.length) {
+                targetOutput.textContent += rawSecureMessage.charAt(stringPointer);
+                stringPointer++;
+                setTimeout(streamTerminalText, printSpeed);
+            }
+        }
+
+        window.addEventListener('DOMContentLoaded', () => {
+            setTimeout(streamTerminalText, 800);
+        });
+
+        function smoothReturn(e) {
+            e.preventDefault();
+            const viewport = document.querySelector('.text-viewport');
+            viewport.classList.add('exiting');
+            setTimeout(() => {
+                window.location.href = 'gifts.html';
+            }, 550);
+        }
+    </script>
+    <script src="script.js"></script>
+</body>
+</html>

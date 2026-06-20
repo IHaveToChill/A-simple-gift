@@ -1,0 +1,201 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Visual Data Archives // Node 01</title>
+    <link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@400;600;700&display=swap" rel="stylesheet">
+    
+    <style>
+        /* 🌑 BASE ARCHITECTURE */
+        html, body {
+            background-color: #05070a;
+            margin: 0;
+            padding: 0;
+            font-family: 'Space Grotesk', sans-serif;
+            color: #ffffff;
+            width: 100vw;
+            min-height: 100vh;
+            overflow-x: hidden;
+            overflow-y: auto;
+        }
+
+        .archive-viewport {
+            width: 100%;
+            min-height: 100vh;
+            padding: 140px 40px 100px 40px;
+            box-sizing: border-box;
+            display: flex;
+            flex-direction: column;
+            justify-content: flex-start;
+            align-items: center;
+            opacity: 0;
+            transform: translateY(20px);
+            transition: transform 0.6s cubic-bezier(0.16, 1, 0.3, 1), opacity 0.5s ease;
+            animation: coreInitialize 0.8s cubic-bezier(0.16, 1, 0.3, 1) forwards;
+        }
+
+        .archive-viewport.exiting {
+            opacity: 0;
+            transform: scale(0.95) translateY(-20px);
+        }
+
+        @keyframes coreInitialize { to { opacity: 1; transform: translateY(0); } }
+
+        /* 🏛️ HEADER BLOCK */
+        .header-block {
+            position: fixed;
+            top: 40px;
+            left: 40px;
+            text-align: left;
+            z-index: 5;
+        }
+
+        .meta-tag {
+            font-family: monospace;
+            font-size: 11px;
+            color: #00e5ff;
+            text-transform: uppercase;
+            letter-spacing: 3px;
+            margin-bottom: 8px;
+        }
+
+        .node-title {
+            font-size: 36px;
+            font-weight: 700;
+            text-transform: uppercase;
+            margin: 0;
+            letter-spacing: -0.5px;
+        }
+
+        /* 📐 PYRAMID GRID LOGIC (2 TOP // 3 BOTTOM) */
+        .pyramid-wrapper {
+            display: flex;
+            flex-direction: column;
+            gap: 35px;
+            width: 100%;
+            max-width: 1300px;
+        }
+
+        .row-top, .row-bottom {
+            display: flex;
+            justify-content: center;
+            flex-wrap: wrap;
+            gap: 35px;
+        }
+
+        /* 🖼️ THE SQUARES */
+        .matrix-frame {
+            width: 360px;
+            height: 360px;
+            background: linear-gradient(135deg, rgba(20, 25, 33, 0.85) 0%, rgba(10, 12, 16, 0.95) 100%);
+            border: 1px solid rgba(0, 229, 255, 0.2);
+            border-radius: 18px;
+            overflow: hidden;
+            cursor: pointer;
+            transition: transform 0.5s cubic-bezier(0.16, 1, 0.3, 1), border-color 0.4s ease;
+            position: relative;
+            flex-shrink: 0;
+        }
+
+        .matrix-frame:hover {
+            transform: scale(1.05);
+            border-color: #00e5ff;
+            box-shadow: 0 15px 40px rgba(0, 229, 255, 0.25);
+        }
+
+        .image-placeholder {
+            width: 100%;
+            height: 100%;
+            background-size: cover;
+            background-position: center;
+            opacity: 0.7;
+            transition: opacity 0.4s ease;
+        }
+
+        .matrix-frame:hover .image-placeholder {
+            opacity: 1;
+        }
+
+        /* 🔙 RETURN BUTTON */
+        .action-return-btn {
+            position: fixed;
+            bottom: 30px;
+            left: 40px;
+            display: inline-flex;
+            align-items: center;
+            background: rgba(20, 25, 33, 0.9);
+            border: 1px solid rgba(255, 255, 255, 0.08);
+            padding: 14px 24px;
+            border-radius: 6px;
+            color: #ffffff;
+            text-decoration: none;
+            font-family: monospace;
+            font-size: 11px;
+            font-weight: bold;
+            letter-spacing: 2px;
+            transition: all 0.4s cubic-bezier(0.16, 1, 0.3, 1);
+            z-index: 5;
+        }
+
+        .action-return-btn:hover {
+            background: #00e5ff;
+            border-color: #00e5ff;
+            color: #05070a;
+            box-shadow: 0 10px 25px rgba(0, 229, 255, 0.3);
+            transform: translateX(-4px);
+        }
+
+        /* Responsive scaling for smaller screens */
+        @media (max-width: 1250px) {
+            .matrix-frame { width: 220px; height: 220px; }
+            .row-top, .row-bottom { gap: 20px; }
+            .pyramid-wrapper { gap: 20px; }
+        }
+
+        @media (max-width: 700px) {
+            .matrix-frame { width: 130px; height: 130px; }
+            .row-top, .row-bottom { gap: 14px; }
+            .pyramid-wrapper { gap: 14px; }
+            .archive-viewport { padding: 120px 20px 100px 20px; }
+        }
+    </style>
+</head>
+<body>
+
+    <div class="archive-viewport">
+
+        <div class="header-block">
+            <div class="meta-tag">// NODE_01 // MEMORY_ARCHIVE</div>
+            <h1 class="node-title">Visual Data Archives</h1>
+        </div>
+
+        <div class="pyramid-wrapper">
+            <div class="row-top">
+                <div class="matrix-frame"><div class="image-placeholder" style="background-image: url('photo1.jpg');"></div></div>
+                <div class="matrix-frame"><div class="image-placeholder" style="background-image: url('photo2.jpg');"></div></div>
+            </div>
+
+            <div class="row-bottom">
+                <div class="matrix-frame"><div class="image-placeholder" style="background-image: url('photo3.jpg');"></div></div>
+                <div class="matrix-frame"><div class="image-placeholder" style="background-image: url('photo4.jpg');"></div></div>
+                <div class="matrix-frame"><div class="image-placeholder" style="background-image: url('photo5.jpg');"></div></div>
+            </div>
+        </div>
+
+        <a href="#" class="action-return-btn" onclick="smoothReturn(event)">&larr; RETURN_TO_CORE</a>
+
+    </div>
+
+    <script>
+        function smoothReturn(e) {
+            e.preventDefault();
+            const viewport = document.querySelector('.archive-viewport');
+            viewport.classList.add('exiting');
+            setTimeout(() => {
+                window.location.href = 'gifts.html';
+            }, 550);
+        }
+    </script>
+</body>
+</html>

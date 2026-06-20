@@ -1,0 +1,389 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Secure Central Core // 3D Deck</title>
+    <link rel="stylesheet" href="style.css">
+    <link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@400;600;700&display=swap" rel="stylesheet">
+    
+    <style>
+        /* 📐 CORE GRID RESET */
+        html, body {
+            background-color: #05070a;
+            margin: 0;
+            padding: 0;
+            font-family: 'Space Grotesk', sans-serif;
+            color: #ffffff;
+            width: 100vw;
+            height: 100vh;
+            overflow: hidden; /* Prevent native window breaking jitters */
+        }
+
+        /* 🏛️ GLOBAL ENTRY CONTINUITY FLOW */
+        .central-hub-canvas {
+            opacity: 0;
+            transform: scale(1.03) translateY(10px);
+            animation: hubInitialize 0.85s cubic-bezier(0.16, 1, 0.3, 1) forwards;
+            width: 100%;
+            height: 100%;
+            position: relative;
+        }
+
+        @keyframes hubInitialize {
+            to {
+                opacity: 1;
+                transform: scale(1) translateY(0);
+            }
+        }
+
+        /* 🏛️ CENTRAL 3D VIEWPORT STAGE */
+        .stage-3d-viewport {
+            position: absolute;
+            top: 45%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            width: 100%;
+            max-width: 1200px;
+            height: 450px;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            /* Sets up deep dimensional perspective space for the layout */
+            perspective: 1200px;
+            transform-style: preserve-3d;
+            z-index: 2;
+        }
+
+        /* 🎴 HIGH-TECH OBSIDIAN TERMINAL CARD CHASSIS */
+        .terminal-3d-card {
+            position: absolute;
+            width: 260px;
+            height: 360px;
+            background: linear-gradient(135deg, rgba(20, 25, 33, 0.85) 0%, rgba(10, 12, 16, 0.95) 100%);
+            border: 1px solid rgba(255, 255, 255, 0.08);
+            border-radius: 16px;
+            box-sizing: border-box;
+            padding: 24px;
+            display: flex;
+            flex-direction: column;
+            justify-content: space-between;
+            cursor: pointer;
+            user-select: none;
+            
+            /* Ultra-premium kinetic transition curves for clean transformations */
+            transition: 
+                transform 0.9s cubic-bezier(0.16, 1, 0.3, 1), 
+                opacity 0.8s cubic-bezier(0.16, 1, 0.3, 1),
+                border-color 0.4s ease,
+                box-shadow 0.4s ease;
+            will-change: transform, opacity;
+        }
+
+        /* Ambient glow response on card hover actions */
+        .terminal-3d-card:hover {
+            border-color: rgba(255, 75, 114, 0.4);
+            box-shadow: 0 15px 35px rgba(255, 75, 114, 0.12);
+        }
+
+        /* 🪐 PLANETARY CORE GRAPHICS */
+        .card-planetary-graphic {
+            width: 120px;
+            height: 120px;
+            margin: 10px auto;
+            border-radius: 50%;
+            position: relative;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+
+        /* Distinct terminal geometric indicators inside specific index layers */
+        .graphic-0 { border: 1px dashed rgba(255, 75, 114, 0.4); background: radial-gradient(circle, rgba(255, 75, 114, 0.15) 0%, transparent 70%); }
+        .graphic-1 { border: 2px solid rgba(0, 229, 255, 0.3); background: radial-gradient(circle, rgba(0, 229, 255, 0.1) 0%, transparent 70%); border-radius: 12px; }
+        .graphic-2 { border: 4px double rgba(255, 75, 114, 0.35); background: radial-gradient(circle, rgba(255, 75, 114, 0.2) 0%, transparent 65%); }
+        .graphic-3 { border: 1px solid rgba(255, 255, 255, 0.2); background: radial-gradient(circle, rgba(255, 255, 255, 0.08) 0%, transparent 70%); clip-path: polygon(50% 0%, 0% 100%, 100% 100%); }
+
+        .graphic-orbit {
+            position: absolute;
+            width: 80%;
+            height: 80%;
+            border: 1px dotted rgba(255, 255, 255, 0.15);
+            border-radius: inherit;
+            animation: cardSpin 25s linear infinite;
+        }
+        @keyframes cardSpin { from { transform: rotate(0deg); } to { transform: rotate(360deg); } }
+
+        /* ⚡ PRISTINE 3D COVERFLOW DISTRIBUTION TRANSLATION MATRICES ⚡ */
+
+        /* --- POSITION VECTOR STATE 0 --- */
+        body[data-active-node="0"] .card-idx-0 { transform: translateX(0) translateZ(100px) rotateY(0deg); opacity: 1; z-index: 10; border-color: #ff4b72; }
+        body[data-active-node="0"] .card-idx-1 { transform: translateX(280px) translateZ(-140px) rotateY(-35deg); opacity: 0.6; z-index: 5; }
+        body[data-active-node="0"] .card-idx-2 { transform: translateX(510px) translateZ(-240px) rotateY(-35deg); opacity: 0.35; z-index: 4; }
+        body[data-active-node="0"] .card-idx-3 { transform: translateX(710px) translateZ(-340px) rotateY(-35deg); opacity: 0.15; z-index: 3; }
+
+        /* --- POSITION VECTOR STATE 1 --- */
+        body[data-active-node="1"] .card-idx-0 { transform: translateX(-280px) translateZ(-140px) rotateY(35deg); opacity: 0.6; z-index: 5; }
+        body[data-active-node="1"] .card-idx-1 { transform: translateX(0) translateZ(100px) rotateY(0deg); opacity: 1; z-index: 10; border-color: #00e5ff; }
+        body[data-active-node="1"] .card-idx-2 { transform: translateX(280px) translateZ(-140px) rotateY(-35deg); opacity: 0.6; z-index: 5; }
+        body[data-active-node="1"] .card-idx-3 { transform: translateX(510px) translateZ(-240px) rotateY(-35deg); opacity: 0.35; z-index: 4; }
+
+        /* --- POSITION VECTOR STATE 2 --- */
+        body[data-active-node="2"] .card-idx-0 { transform: translateX(-510px) translateZ(-240px) rotateY(35deg); opacity: 0.35; z-index: 4; }
+        body[data-active-node="2"] .card-idx-1 { transform: translateX(-280px) translateZ(-140px) rotateY(35deg); opacity: 0.6; z-index: 5; }
+        body[data-active-node="2"] .card-idx-2 { transform: translateX(0) translateZ(100px) rotateY(0deg); opacity: 1; z-index: 10; border-color: #ff4b72; }
+        body[data-active-node="2"] .card-idx-3 { transform: translateX(280px) translateZ(-140px) rotateY(-35deg); opacity: 0.6; z-index: 5; }
+
+        /* --- POSITION VECTOR STATE 3 --- */
+        body[data-active-node="3"] .card-idx-0 { transform: translateX(-710px) translateZ(-340px) rotateY(35deg); opacity: 0.15; z-index: 3; }
+        body[data-active-node="3"] .card-idx-1 { transform: translateX(-510px) translateZ(-240px) rotateY(35deg); opacity: 0.35; z-index: 4; }
+        body[data-active-node="3"] .card-idx-2 { transform: translateX(-280px) translateZ(-140px) rotateY(35deg); opacity: 0.6; z-index: 5; }
+        body[data-active-node="3"] .card-idx-3 { transform: translateX(0) translateZ(100px) rotateY(0deg); opacity: 1; z-index: 10; border-color: #ffffff; }
+
+        /* 🏙️ BOTTOM DATA PANEL PANEL HOVER CAPTURES */
+        .text-display-conduit {
+            position: fixed;
+            bottom: 8%;
+            left: 50%;
+            transform: translateX(-50%);
+            width: 100%;
+            max-width: 550px;
+            text-align: center;
+            z-index: 3;
+            pointer-events: none;
+        }
+
+        .description-packet {
+            position: absolute;
+            bottom: 0; left: 0; right: 0;
+            opacity: 0;
+            transform: translateY(20px);
+            transition: transform 0.6s cubic-bezier(0.16, 1, 0.3, 1), opacity 0.5s ease;
+        }
+
+        .description-packet.active {
+            position: relative;
+            opacity: 1;
+            transform: translateY(0);
+            pointer-events: auto;
+        }
+
+        /* 🧪 THEME MONOSPACE GRAPHICS COMPLIANCE */
+        .meta-tag {
+            font-family: monospace;
+            font-size: 11px;
+            color: #ff4b72;
+            text-transform: uppercase;
+            letter-spacing: 3px;
+            margin-bottom: 10px;
+        }
+        .card-idx-1 .meta-tag { color: #00e5ff; }
+        .card-idx-3 .meta-tag { color: #ffffff; }
+
+        .section-title {
+            font-size: 32px;
+            font-weight: 700;
+            letter-spacing: -0.5px;
+            margin: 0 0 10px 0;
+            text-transform: uppercase;
+        }
+
+        .card-header-title {
+            font-size: 16px;
+            font-weight: 700;
+            letter-spacing: -0.2px;
+            margin: 0;
+            text-transform: uppercase;
+            text-align: center;
+        }
+
+        .section-desc {
+            font-size: 13px;
+            line-height: 1.6;
+            color: rgba(255, 255, 255, 0.45);
+            margin-bottom: 24px;
+        }
+
+        /* 🚀 ACTIONS CONNECTIVITY HUB */
+        .action-terminal-btn {
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            background: rgba(20, 25, 33, 0.9);
+            border: 1px solid rgba(255, 255, 255, 0.08);
+            padding: 12px 20px;
+            border-radius: 6px;
+            color: #ffffff;
+            text-decoration: none;
+            font-family: monospace;
+            font-size: 11px;
+            font-weight: bold;
+            letter-spacing: 1px;
+            transition: all 0.4s cubic-bezier(0.16, 1, 0.3, 1);
+            width: 100%;
+            box-sizing: border-box;
+        }
+
+        .action-terminal-btn:hover {
+            background: #ff4b72;
+            border-color: #ff4b72;
+            color: #05070a;
+            box-shadow: 0 10px 25px rgba(255, 75, 114, 0.3);
+        }
+        .card-idx-1 .action-terminal-btn:hover { background: #00e5ff; border-color: #00e5ff; }
+        .card-idx-3 .action-terminal-btn:hover { background: #ffffff; border-color: #ffffff; }
+
+        /* ⏩ DESCRIPTOR DIALS */
+        .scroll-hint {
+            position: fixed;
+            top: 5%;
+            left: 50%;
+            transform: translateX(-50%);
+            font-family: monospace;
+            font-size: 10px;
+            color: rgba(255, 255, 255, 0.3);
+            letter-spacing: 2px;
+            z-index: 4;
+            text-align: center;
+        }
+    </style>
+</head>
+<body data-active-node="0">
+
+    <div class="app-container central-hub-canvas">
+        
+        <div class="scroll-hint">USE MOUSE WHEEL OR CLICK CARDS TO ROTATE SECTORS</div>
+
+        <div class="stage-3d-viewport" id="carouselStage">
+            
+            <div class="terminal-3d-card card-idx-0" onclick="globalSyncDeck(0)">
+                <div class="meta-tag">SYS // HUB</div>
+                <div class="card-planetary-graphic graphic-0"><div class="graphic-orbit"></div></div>
+                <h3 class="card-header-title"></h3>
+            </div>
+
+            <div class="terminal-3d-card card-idx-1" onclick="globalSyncDeck(1)">
+                <div class="meta-tag">LOG // 01</div>
+                <div class="card-planetary-graphic graphic-1"><div class="graphic-orbit"></div></div>
+                <h3 class="card-header-title"></h3>
+            </div>
+
+            <div class="terminal-3d-card card-idx-2" onclick="globalSyncDeck(2)">
+                <div class="meta-tag">LOG // 02</div>
+                <div class="card-planetary-graphic graphic-2"><div class="graphic-orbit"></div></div>
+                <h3 class="card-header-title"></h3>
+            </div>
+
+            <div class="terminal-3d-card card-idx-3" onclick="globalSyncDeck(3)">
+                <div class="meta-tag">LOG // 03</div>
+                <div class="card-planetary-graphic graphic-3"><div class="graphic-orbit"></div></div>
+                <h3 class="card-header-title"></h3>
+            </div>
+
+        </div>
+
+        <div class="text-display-conduit">
+            
+            <div class="description-packet active" id="desc-0">
+                <h1 class="section-title main-question">Secure Central Core</h1>
+                <br>
+                <br>
+            </div>
+
+            <div class="description-packet" id="desc-1">
+                <h2 class="section-title">Some memories we've made throughout this year</h2>
+                <br>
+                <br>
+                <a href="gift1.html" class="action-terminal-btn iso-card"> &rarr;</a>
+            </div>
+
+            <div class="description-packet" id="desc-2">
+                <h2 class="section-title">A song that reminds me of you</h2>
+                <br>
+                <br>
+                <a href="gift2.html" class="action-terminal-btn iso-card"> &rarr;</a>
+            </div>
+
+            <div class="description-packet" id="desc-3">
+                <h2 class="section-title">A simple message i wrote</h2>
+                <br>
+                <br>
+                <a href="gift3.html" class="action-terminal-btn iso-card"> &rarr;</a>
+            </div>
+
+        </div>
+
+    </div>
+
+    <script>
+        let currentActiveNode = 0;
+        const totalNodes = 4;
+        let layoutThrottle = false;
+        const speedCooldown = 900; // Synchronized perfectly to CSS transit schedules
+
+        function globalSyncDeck(targetIdx) {
+            if (targetIdx < 0 || targetIdx >= totalNodes) return;
+            currentActiveNode = targetIdx;
+
+            // 1. Shift node markers on body tag to pivot all horizontal cards in 3D space instantly
+            document.body.setAttribute('data-active-node', currentActiveNode);
+
+            // 2. Synchronize active data logs panels right below the cards
+            const descriptions = document.querySelectorAll('.description-packet');
+            descriptions.forEach((packet, index) => {
+                if (index === currentActiveNode) {
+                    packet.classList.add('active');
+                } else {
+                    packet.classList.remove('active');
+                }
+            });
+        }
+
+        // Mouse Wheel Hijack Translation Engine
+        window.addEventListener('wheel', (e) => {
+            e.preventDefault(); // Lock default viewport shift dead
+            if (layoutThrottle) return;
+
+            if (e.deltaY > 0) {
+                if (currentActiveNode < totalNodes - 1) {
+                    layoutThrottle = true;
+                    globalSyncDeck(currentActiveNode + 1);
+                    setTimeout(() => { layoutThrottle = false; }, speedCooldown);
+                }
+            } else if (e.deltaY < 0) {
+                if (currentActiveNode > 0) {
+                    layoutThrottle = true;
+                    globalSyncDeck(currentActiveNode - 1);
+                    setTimeout(() => { layoutThrottle = false; }, speedCooldown);
+                }
+            }
+        }, { passive: false });
+
+        // Touch control trackers for high-fidelity response on small display panels
+        let initialSwipeX = 0;
+        window.addEventListener('touchstart', (e) => {
+            initialSwipeX = e.changedTouches[0].screenX;
+        }, { passive: true });
+
+        window.addEventListener('touchend', (e) => {
+            if (layoutThrottle) return;
+            let finalSwipeX = e.changedTouches[0].screenX;
+            let swipeDistance = initialSwipeX - finalSwipeX;
+
+            if (Math.abs(swipeDistance) > 50) {
+                if (swipeDistance > 0 && currentActiveNode < totalNodes - 1) {
+                    layoutThrottle = true;
+                    globalSyncDeck(currentActiveNode + 1);
+                    setTimeout(() => { layoutThrottle = false; }, speedCooldown);
+                } else if (swipeDistance < 0 && currentActiveNode > 0) {
+                    layoutThrottle = true;
+                    globalSyncDeck(currentActiveNode - 1);
+                    setTimeout(() => { layoutThrottle = false; }, speedCooldown);
+                }
+            }
+        }, { passive: true });
+    </script>
+
+    <script src="script.js"></script>
+</body>
+</html>

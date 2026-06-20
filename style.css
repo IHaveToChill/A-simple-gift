@@ -1,0 +1,342 @@
+/* ==========================================================================
+   🌌 FUTURISTIC CYBER-GRID INTERACTIVE DESIGN SYSTEM
+   ========================================================================== */
+
+@import url('https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@400;600;700&family=Syncopate:wght@700&display=swap');
+
+* {
+    box-sizing: border-box;
+    margin: 0;
+    padding: 0;
+}
+
+/* --- High-End Tech Grid Background --- */
+body {
+    background-color: #0d0f12;
+    /* This creates the micro dot-matrix grid from the video */
+    background-image: 
+        radial-gradient(rgba(255, 255, 255, 0.05) 1px, transparent 0),
+        linear-gradient(to right, rgba(255, 255, 255, 0.02) 1px, transparent 1px),
+        linear-gradient(to bottom, rgba(255, 255, 255, 0.02) 1px, transparent 1px);
+    background-size: 24px 24px, 120px 120px, 120px 120px;
+    background-position: center center;
+    font-family: 'Space Grotesk', -apple-system, sans-serif;
+    color: #ffffff;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    min-height: 100vh;
+    overflow-x: hidden;
+    padding: 40px 20px;
+}
+
+/* --- Premium Command Center UI Container --- */
+.app-container {
+    position: relative;
+    width: 100%;
+    max-width: 420px;
+    background: rgba(18, 22, 28, 0.75);
+    backdrop-filter: blur(20px);
+    -webkit-backdrop-filter: blur(20px);
+    border: 1px solid rgba(255, 255, 255, 0.08);
+    border-radius: 16px;
+    padding: 45px 30px;
+    text-align: center;
+    box-shadow: 0 30px 70px rgba(0, 0, 0, 0.5), inset 0 1px 0 rgba(255, 255, 255, 0.1);
+    transition: all 0.5s cubic-bezier(0.2, 1, 0.2, 1);
+}
+
+/* --- Technical Structural Details (Like the video layout) --- */
+.app-container::before, .app-container::after {
+    content: "SYS // LOC.2026";
+    position: absolute;
+    font-size: 10px;
+    font-family: monospace;
+    color: rgba(255, 255, 255, 0.2);
+    letter-spacing: 2px;
+}
+.app-container::before { top: 15px; left: 20px; }
+.app-container::after { bottom: 15px; right: 20px; content: "CORE // V.02"; }
+
+/* --- Cyber Cat Display Terminal (Replacing the 3D waves) --- */
+.cyber-cat-display {
+    position: relative;
+    width: 100%;
+    max-width: 260px;
+    height: 200px;
+    margin: 0 auto 35px auto;
+    background: #11151c;
+    border: 1px solid rgba(255, 255, 255, 0.1);
+    border-radius: 12px;
+    overflow: hidden;
+    box-shadow: 0 15px 35px rgba(0, 0, 0, 0.5), inset 0 0 15px rgba(0,0,0,0.8);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.cat-gif-asset {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    opacity: 0.85;
+    filter: contrast(110%) brightness(95%);
+}
+
+/* Futuristic grid scanline lines overlaying the cat gifs */
+.scanline-overlay {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: linear-gradient(rgba(18, 16, 16, 0) 50%, rgba(0, 0, 0, 0.25) 50%), linear-gradient(90deg, rgba(255, 0, 0, 0.03), rgba(0, 255, 0, 0.01), rgba(0, 0, 255, 0.03));
+    background-size: 100% 4px, 6px 100%;
+    pointer-events: none;
+    z-index: 2;
+}
+
+/* Green glow border when she clicks YES */
+.success-border {
+    border-color: #42e695 !important;
+    box-shadow: 0 0 30px rgba(66, 230, 149, 0.25), 0 15px 35px rgba(0, 0, 0, 0.5) !important;
+}
+
+
+
+@keyframes waveMotion {
+    0% { transform: rotateX(60deg) rotateY(0deg) translateZ(-10px); filter: hue-rotate(0deg); }
+    50% { transform: rotateX(45deg) rotateY(180deg) translateZ(15px); filter: hue-rotate(45deg); }
+    100% { transform: rotateX(60deg) rotateY(360deg) translateZ(-10px); filter: hue-rotate(0deg); }
+}
+
+/* --- Screen Display Toggle --- */
+.screen { display: none; width: 100%; flex-direction: column; align-items: center; }
+.screen.active { display: flex; animation: cyberReveal 0.6s cubic-bezier(0.16, 1, 0.3, 1) forwards; }
+
+@keyframes cyberReveal {
+    from { opacity: 0; transform: scale(0.96) translateY(10px); }
+    to { opacity: 1; transform: scale(1) translateY(0); }
+}
+
+/* --- Futuristic Typography --- */
+h1.main-question {
+    font-family: 'Syncopate', sans-serif;
+    font-size: 20px;
+    font-weight: 700;
+    letter-spacing: 2px;
+    text-transform: uppercase;
+    color: #ffffff;
+    margin-bottom: 35px;
+    line-height: 1.4;
+}
+
+.success-text {
+    background: linear-gradient(90deg, #ff4b72, #a8c1ef);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    text-shadow: 0 0 40px rgba(255, 75, 114, 0.2);
+}
+
+.subtitle {
+    font-size: 13px;
+    color: rgba(255, 255, 255, 0.4);
+    text-transform: uppercase;
+    letter-spacing: 1.5px;
+    margin-bottom: 40px;
+}
+
+/* --- Industrial Buttons Layout --- */
+.btn-row {
+    display: flex;
+    flex-direction: column; /* Stacked layout fits the technical aesthetic better */
+    gap: 14px;
+    width: 100%;
+}
+
+.btn {
+    font-family: 'Space Grotesk', sans-serif;
+    border: 1px solid rgba(255, 255, 255, 0.15);
+    background: rgba(255, 255, 255, 0.03);
+    padding: 16px 32px;
+    font-size: 14px;
+    font-weight: 600;
+    letter-spacing: 2px;
+    text-transform: uppercase;
+    color: #ffffff;
+    border-radius: 8px;
+    cursor: pointer;
+    position: relative;
+    overflow: hidden;
+    transition: all 0.3s cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+.btn-yes {
+    background: #ffffff;
+    color: #0d0f12;
+    border: 1px solid #ffffff;
+}
+
+.btn-yes:hover {
+    box-shadow: 0 0 25px rgba(255, 255, 255, 0.4);
+    transform: translateY(-2px);
+}
+
+.btn-no {
+    color: rgba(255, 255, 255, 0.6);
+}
+
+.btn-no:hover {
+    background: rgba(255, 75, 114, 0.1);
+    border-color: rgba(255, 75, 114, 0.4);
+    color: #ff4b72;
+}
+
+.fade-out {
+    opacity: 0;
+    transform: scale(0.8) !important;
+    pointer-events: none;
+}
+
+/* ==========================================================================
+   🎁 3D MATRIX GIFTS GRID STYLES
+   ========================================================================== */
+
+.gifts-container { max-width: 1050px; }
+
+.cards-grid-3d {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    gap: 30px;
+    width: 100%;
+    perspective: 2000px; /* Deepest 3D perspective field */
+}
+
+.secret-card-3d {
+    width: 260px;
+    height: 360px;
+    background: transparent;
+    cursor: pointer;
+    transform-style: preserve-3d;
+}
+
+/* The Futuristic Float Shell */
+.card-layer {
+    position: relative;
+    width: 100%;
+    height: 100%;
+    background: rgba(20, 25, 33, 0.6);
+    border: 1px solid rgba(255, 255, 255, 0.08);
+    border-radius: 12px;
+    padding: 30px 20px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    transform-style: preserve-3d;
+    /* Angled beautifully in space like the dashboard components in the video */
+    transform: rotateX(15deg) rotateY(-10deg);
+    box-shadow: -15px 20px 40px rgba(0, 0, 0, 0.6);
+    transition: all 0.6s cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+.secret-card-3d:hover .card-layer {
+    /* Straightens up and launches forward out of the screen layout */
+    transform: rotateX(0deg) rotateY(0deg) translateZ(50px);
+    background: rgba(28, 35, 46, 0.95);
+    border-color: #ff4b72;
+    box-shadow: 0 40px 8px -20px rgba(255, 75, 114, 0.15), 0 30px 60px rgba(0, 0, 0, 0.7);
+}
+
+.gift-main-emoji {
+    font-size: 80px;
+    margin-bottom: 30px;
+    display: inline-block;
+    transform: translateZ(80px); /* Deep floating tier for the icon */
+    transition: transform 0.6s cubic-bezier(0.16, 1, 0.3, 1);
+    filter: drop-shadow(0 0 20px rgba(255,255,255,0.1));
+}
+
+.secret-card-3d:hover .gift-main-emoji {
+    transform: translateZ(120px) scale(1.1);
+    filter: drop-shadow(0 0 30px rgba(255, 75, 114, 0.4));
+}
+
+.gift-title {
+    font-family: 'Space Grotesk', sans-serif;
+    font-size: 16px;
+    font-weight: 700;
+    letter-spacing: 1px;
+    text-transform: uppercase;
+    color: #ffffff;
+    margin-bottom: 10px;
+    transform: translateZ(50px);
+}
+
+.gift-tag {
+    font-size: 11px;
+    color: #ff4b72;
+    font-weight: 700;
+    letter-spacing: 2px;
+    text-transform: uppercase;
+    transform: translateZ(30px);
+    border: 1px solid rgba(255, 75, 114, 0.3);
+    padding: 4px 12px;
+    border-radius: 4px;
+    background: rgba(255, 75, 114, 0.05);
+}
+
+/* ==========================================================================
+   🌌 SILKY-SMOOTH SPATIAL GLIDE ENGINE (Inspired by the Planets Video)
+   ========================================================================== */
+
+body {
+    position: relative;
+    overflow-x: hidden;
+    background: #0d0f12;
+}
+
+/* 📤 THE OUTGOING DECK: Smoothly glides up and melts away when clicked */
+body.page-is-gliding .app-container {
+    transform: translateY(-60px) scale(0.96);
+    opacity: 0;
+    filter: blur(8px);
+    /* Ultra premium deceleration curve to match the video's fluid motion */
+    transition: all 0.75s cubic-bezier(0.25, 1, 0.5, 1);
+}
+
+/* 📥 THE INCOMING VAULT: Glides up from below and gently expands into focus */
+.gift-container-fluid {
+    opacity: 0;
+    transform: translateY(80px) scale(0.93);
+    filter: blur(12px);
+    animation: planetStyleArrival 0.9s cubic-bezier(0.25, 1, 0.5, 1) forwards;
+}
+
+@keyframes planetStyleArrival {
+    0% {
+        opacity: 0;
+        transform: translateY(80px) scale(0.93);
+        filter: blur(12px);
+    }
+    100% {
+        opacity: 1;
+        transform: translateY(0) scale(1);
+        filter: blur(0px);
+    }
+}
+
+/* ✨ STAGGERED INTERNAL ELEMENTS: Adds that professional delay to titles/images */
+.gift-container-fluid .stagger-item {
+    opacity: 0;
+    transform: translateY(25px);
+    animation: itemFloatUp 0.8s cubic-bezier(0.25, 1, 0.5, 1) 0.25s forwards;
+}
+
+@keyframes itemFloatUp {
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
